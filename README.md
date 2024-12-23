@@ -7,7 +7,7 @@ jython	//我用的是2.7.3
 
 # 安装
 
-![安装](D:\Desktop\git\bp_py_regular-expressions\images\0.jpg)
+![安装](images/0.jpg)
 
 ## 页面
 
