@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from burp import IBurpExtender
 from burp import IContextMenuFactory
 from javax.swing import JMenuItem, JPanel, JTextField, JButton, BoxLayout
@@ -79,9 +80,17 @@ class BurpExtender(IBurpExtender, IContextMenuFactory):
         callbacks.addSuiteTab(RegexTab(panel))
 
     def update_regex(self, event):
-        # 更新正则表达式
-        self.regex = self.regex_input.getText()
+        # 获取并转义正则表达式
+        raw_regex = self.regex_input.getText()
+        self.regex = self.escape_special_characters(raw_regex)
         self._stdout.write("Regex updated to: {}\n".format(self.regex))
+
+    def escape_special_characters(self, raw_regex):
+        # 转义特殊字符
+        special_chars = ["'", '"']
+        for char in special_chars:
+            raw_regex = raw_regex.replace(char, '\\' + char)
+        return raw_regex
 
     def update_save_path(self, event):
         # 更新保存路径
